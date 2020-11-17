@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration scan="true" scanPeriod="3 seconds">
+	
+	<property name="LOG_HOME" value = "${user.dir}\\log"/>
+	
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <layout>
+            <pattern>
+                %d{HH:mm:ss.SSS} [%thread] %-5level %logger{32} - %msg%n
+            </pattern>
+        </layout>
+    </appender>
+    
+    
+    <!-- C:/Maintenance/log/MT_LOG.log 파일에 최신 로그 생성 -->
+    <!-- C:/Maintenance/log/MT_LOG-날짜.log일에 과거 로그 보관 -->
+    <!-- 10kb초과, 날짜 변경 시점마다 생성, 생성된지 15일 이상된 파일은 삭제 -->
+    
+    <appender name="file" 
+    	class="ch.qos.logback.core.rolling.RollingFileAppender">
+
+    	<file>${LOG_HOME}\\Maintenance_Log.txt</file>
+    	
+      	<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+       		<FileNamePattern>${LOG_HOME}\\Maintenance_Log.%d{yyyy-MM-dd}.%i.log</FileNamePattern>
+			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+	         	 <maxFileSize>1MB</maxFileSize>
+	        </timeBasedFileNamingAndTriggeringPolicy>		
+	      	<maxHistory>15</maxHistory>
+	      	 <totalSizeCap>1GB</totalSizeCap>   
+     	</rollingPolicy>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger[%method:%line] - %msg%n%n</pattern>
+            <!-- 파일에 기록할 로그 포맷 -->
+        </encoder>
+        
+    </appender>
+    
+    
+     <!-- C:/Maintenance/log/MT_Error.log 파일에 최신 로그 생성 -->
+    <!-- C:/Maintenance/log/MT_Error-날짜.log일에 과거 로그 보관 -->
+    <!-- 10kb초과, 날짜 변경 시점마다 생성, 생성된지 15일 이상된 파일은 삭제 -->
+    
+    <appender name="errorDailyRollingFileAppender"
+          class="ch.qos.logback.core.rolling.RollingFileAppender">
+  		
+  		<file>${LOG_HOME}\\Maintenance_Error.log</file>
+  
+	   	<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+	        <FileNamePattern>${LOG_HOME}\\Maintenance_Error_%d{yyyy-MM-dd}.%i.log</FileNamePattern>
+	      	<!-- keep 30 days' worth of history, 1File max 100MB, Total Files max 1GB -->
+	      	<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+	         	 <maxFileSize>1MB</maxFileSize>
+	        </timeBasedFileNamingAndTriggeringPolicy>		
+	      	<maxHistory>15</maxHistory>
+	      	 <totalSizeCap>1GB</totalSizeCap>   
+	     </rollingPolicy>
+	   
+	    <encoder>
+	        <Pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger[%method:%line] - %msg%n%n</Pattern>
+	        <charset>UTF-8</charset>
+	    </encoder>
+	    <filter class="ch.qos.logback.classic.filter.LevelFilter">
+	        <level>ERROR</level>
+	        <onMatch>ACCEPT</onMatch>
+	        <onMismatch>DENY</onMismatch>
+	    </filter>
+
+	</appender>
+    
+	<logger name="org.springframework" level="INFO" />
+    <logger name="org.hibernate" level="debug"/>
+    <logger name="com.sujemall.webapp" level="debug"></logger>
+
+	<!-- DEBUG 레벨 이하 로그를 콘솔 및 파일로 출력 -->
+    <root level="DEBUG">
+        <appender-ref ref="console" />
+        <appender-ref ref="errorDailyRollingFileAppender" />
+        <appender-ref ref="file" />
+    </root>
+
+</configuration>
+
