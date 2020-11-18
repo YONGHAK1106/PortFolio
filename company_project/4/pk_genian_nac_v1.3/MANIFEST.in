@@ -1,0 +1,4 @@
+include README.md
+include pk_genian_nac/util/*
+include pk_genian_nac/LICENSE
+include doc/*

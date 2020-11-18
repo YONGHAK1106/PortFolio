@@ -1,0 +1,12 @@
+[resilient.circuits.components]
+FunctFnGenianNacFunctionComponent = pk_genian_nac.components.funct_fn_genian_nac:FunctionComponent
+
+[resilient.circuits.configsection]
+gen_config = pk_genian_nac.util.config:config_section_data
+
+[resilient.circuits.customize]
+customize = pk_genian_nac.util.customize:customization_data
+
+[resilient.circuits.selftest]
+selftest = pk_genian_nac.util.selftest:selftest_function
+

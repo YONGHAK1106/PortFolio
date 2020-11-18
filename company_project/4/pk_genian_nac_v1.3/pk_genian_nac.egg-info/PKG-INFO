@@ -1,0 +1,11 @@
+Metadata-Version: 1.1
+Name: pk-genian-nac
+Version: 1.1.0
+Summary: Resilient Circuits Components for 'pk_genian_nac'
+Home-page: genians.com
+Author: Jaehyun.Kim
+Author-email: integration@genians.com
+License: Genians
+Description: Resilient Circuits Components for 'pk_genian_nac'
+Platform: any
+Classifier: Programming Language :: Python
