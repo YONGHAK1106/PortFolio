@@ -1,5 +1,7 @@
 # 파일 이름 수정
 # pdf 파일 암호화
+# 엑셀 파일 암호화
+# 엑셀 파일 비교 후 파일 생성
 # jira 연동
 # jira 에 파일 자동 업로드 및 코멘트 자동 작성
 
@@ -23,8 +25,8 @@ from jira import JIRA
 ''' PARAMS '''
 
 # JIRA URL 및 계정 정보
-options = {"server": "https://ims.genians.com/jira/"}
-jira = JIRA(options, basic_auth=('yhkim93', '@@QQyhkim!!!4488'))
+options = {"server": "https://ims....com/jira/"}
+jira = JIRA(options, basic_auth=('id', 'password'))
 
 # 시간 계산
 now = time.localtime()
